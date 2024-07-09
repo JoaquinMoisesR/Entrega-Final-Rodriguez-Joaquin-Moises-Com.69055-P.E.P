@@ -11,15 +11,13 @@ def to_markdown(text):
   text = text.replace('•', '  *')
   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
+# API KEY de Google AI Studio - Gemini
+
 GOOGLE_API_KEY = 'AIzaSyD-YUzWVLtfizySmOjwXcTMpa8ZidgqqBY';
 
-##########################################################
 genai.configure(api_key=GOOGLE_API_KEY)
 
-# for m in genai.list_models():
-#   if 'generateContent' in m.supported_generation_methods:
-#     print(m.name)
-
+# Modelo de generación de contenido con Gemini AI Studio - 'gemini-1.0-pro'
 model = genai.GenerativeModel('gemini-1.0-pro')
 
 def consulta(context,prompt):
@@ -28,32 +26,32 @@ def consulta(context,prompt):
   with open("archivo.txt", "w") as f:
     f.write(archivo)
 
-  return response.text
+  return archivo
 
-# def to_markdown(text):
-#   text = text.replace('•', '  *')
-#   return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
+def to_markdown(text):
+  text = text.replace('•', '  *')
+  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
 
 ################################################################################################
 # Título de la aplicación
-st.title("Consultorio online")
+st.title("CosMOD - Vanguardia de MODA Y COSTURA para toda MODISTA")
 
 # Texto de introducción
-st.write("Bienvenido a tu consultorio online. Aqui vas a recibir una respuesta a tus dudas, estados de animo y una palabra de aliento para tu día a día y que sigas tu vida a full.")
+st.write("Bienvenido a CosMOD!!, la app que trae lo último en moda y costura a nivel mundial para toda modista, aqui encontraras toda la info que debes saber para estar a la vanguardia a la hora de confeccionar una prenda!")
 
 # Entrada del prompt del usuario
-prompt = st.text_area("Escribe tu estado de ánimo en una sola palabra aquí: ")
+prompt = st.text_area("De forma clara y concisa, escribí aquí, tu consulta sobre la prenda que quieras confeccionar o una determinada moda que quieras conocer: ")
 
-context= "Eres un especialista analizando personas. Quiero que te comportes como un anlista de estados de ánimo, y que puedas dar un consejo que pueda dar calma, ánimo, fuerza o consuelo, según corresponda. El estado de sensación que quiero que analices es: "
+context= "Eres un especialista sobre moda y costura. Analizaras la consulta sobre la prenda a confeccionar, o la consulta sobre la moda en cualquier parte del mundo. Generaras la respuesta mas completa. La prenda o moda que deberas investigar sera la siguiente: "
 
 # Botón para mostrar el nombre
-if st.button("analiza"):
+if st.button("Consulta"):
     if prompt:
         # Llamar a la API y obtener la respuesta
-        response = consulta(context,prompt)
+        response = consulta(context, prompt),
         
         # Visualizar la respuesta
         st.write(response)
        
     else:
-        st.write("Por favor, escribe un prompt.")
+        st.write("No has escrito nada, por favor, escribe tu consulta!!")
