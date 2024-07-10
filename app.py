@@ -17,6 +17,10 @@ GOOGLE_API_KEY = 'AIzaSyD-YUzWVLtfizySmOjwXcTMpa8ZidgqqBY';
 
 genai.configure(api_key=GOOGLE_API_KEY)
 
+# for m in genai.list_models():
+#   if 'generateContent' in m.supported_generation_methods:
+#     print(m.name)
+
 # Modelo de generación de contenido con Gemini AI Studio - 'gemini-1.0-pro'
 model = genai.GenerativeModel('gemini-1.0-pro')
 
@@ -48,7 +52,7 @@ context= "Eres un especialista sobre moda y costura. Analizaras la consulta sobr
 if st.button("Consulta"):
     if prompt:
         # Llamar a la API y obtener la respuesta
-        response = consulta(context, prompt),
+        response = consulta(context,prompt)
         
         # Visualizar la respuesta
         st.write(response)
